@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator
 
 
 class Product(models.Model):
+    category = models.ForeignKey('categories.Category', on_delete=models.PROTECT, related_name='products')
     title = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150, unique=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)])

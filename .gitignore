@@ -86,6 +86,5 @@ target/
 __pycache__/
 local_settings.py
 
-*/migrations/0*
 media
 venv

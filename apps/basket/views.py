@@ -12,7 +12,10 @@ class BaskedListAPIView(APIView):
 
     def get(self, request):
         user = request.user
-        baskets = Basket.objects.filter(user_id=user.pk).select_related('product').prefetch_related('product__images')
+        category_id = request.GET.get('category_id', '')
+        baskets = Basket.objects.filter(user_id=user.pk).select_related('product', 'product__category').prefetch_related('product__images')
+        if category_id:
+            baskets = baskets.filter(product__category_id=category_id)
         serializer = BasketSerializer(baskets, many=True, context={'request': request})
         return Response(serializer.data)
 

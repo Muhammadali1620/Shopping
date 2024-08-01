@@ -8,7 +8,10 @@ from apps.products.serializers import ProductSerializer
 
 class ProductListAPIView(APIView):
     def get(self, request, format=None):
-        products = Product.objects.all().prefetch_related('images')
+        category_id = request.GET.get('category_id', '')
+        products = Product.objects.all().prefetch_related('images').select_related('category')
+        if category_id:
+            products = products.filter(category_id=category_id)
         serializer = ProductSerializer(products, many=True, context={'request': request})
         return Response(serializer.data)
 
