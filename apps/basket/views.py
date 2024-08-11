@@ -27,7 +27,7 @@ class CreateOrDeleteBaskedAPIView(APIView):
         user = request.user
         if not Product.objects.filter(pk=pk).exists():
             return Response({'error': 'Bad request'})
-        basket, create = Basket.objects.get_or_create(user_id=user.pk, product_id=pk)
+        basket, create = Basket.objects.get_or_create(user_id=user.pk, product_id=pk, quantity=1)
         message = 'Product successful added to basket'
         if not create:
             message = 'Product successful deleted to basket'

@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'test')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -13,6 +13,7 @@ CORS_ALLOW_ALL_ORIGINS: True
 
 INSTALLED_APPS = [
     'jazzmin',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -20,9 +21,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'rest_framework',
     'drf_yasg',
 
 ]
@@ -104,6 +105,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 AUTHENTICATION_BACKENDS = [
     'apps.users.backends.ModelBackend',
 ]
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
